@@ -3,8 +3,7 @@
 
 แจ้งเตือนผ่าน Line Notify เวลามีการ์ตูนตอนใหม่อัพเดทในเว็บ niceoppai.net
 
-![alt text][logo]
-[logo]: https://github.com/zier/niceoppai_notify/screenshot/picture.png "screenshot"
+![alt text](https://github.com/zier/niceoppai_notify/blob/master/screenshot/picture.png "Screenshot")
 
 #### Before Start
 - install [golang](https://golang.org)
