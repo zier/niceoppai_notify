@@ -7,3 +7,9 @@ services:
         - '6379:6379'
       volumes:
         - ./docker-redis:/data
+  niceoppai_notify:
+      image: 'zier/niceoppai_notify'
+      ports:
+        - '8080:8080'
+      links:
+        - redis
