@@ -2,6 +2,7 @@ package linenotify
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -28,7 +29,14 @@ func (ln *Service) SendPush(token, text string) error {
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
 
 	// Fetch Request
-	_, err = client.Do(req)
+	resp, err := client.Do(req)
+	if err != nil {
+		return err
+	}
 
-	return err
+	if resp.StatusCode == 401 {
+		return errors.New("invalid token")
+	}
+
+	return nil
 }

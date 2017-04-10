@@ -11,3 +11,10 @@ type SourceCartoons interface {
 type LineNotify interface {
 	SendPush(token, text string) error
 }
+
+// TokenStore ...
+type TokenStore interface {
+	Save(token string) error
+	Remove(token string) error
+	All() ([]string, error)
+}

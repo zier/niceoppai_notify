@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>NewToon LINE Notify</title>
+    <meta property="og:title" content="Newtoon LINE Notify" />
+    <meta property="og:description" content="แจ้งเตือนการ์ตูนตอนใหม่ผ่าน LINE Notify" />
+    <meta property="og:type" content="cartoon.line.notify" />
+    <meta property="og:url" content="https://newtoon.afternoob.com/" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/zier/niceoppai_notify/master/screenshot/picture.png" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <style>
+      .full-height {
+        height: 88vh;
+      }
+      .shape-background-1 {
+        height: 85vh;
+        width: 100%;
+        position: absolute;
+        background-color: #00B900;
+      }
+      .white {
+        color: white;
+      }
+      .gray {
+        color: gray;
+      }
+      .btn-success {
+        background-color: #008400;
+        border-color: #008400;
+      }
+      .btn-success:hover {
+        cursor: pointer;
+        background-color: #007600;
+        border-color: #007600;
+      }
+      .footer {
+        height: 30px;
+        background-color: #fff;
+        text-align: center;
+      }
+      @media (max-width: 576px) {
+        .container {
+          padding-top: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shape-background-1">
+    </div>
+    <div class="shape-background-2">
+    </div>
+    <div class="container">
+      <div class="row full-height align-items-center">
+        <div class="col-md-6 col-sm-12">
+          <div class="row">
+            <div class="col">
+            </div>
+            <div class="col-9">
+              <div class="row">
+                <div class="col white">
+                  <h4>
+                    Newtoon LINE Notify
+                  </h4>
+                  <p>
+                    ลงทะเบียนโทเค็นไลน์เพื่อรับข่าวสารเมื่อมีการ์ตูนตอนใหม่ </br>
+                    สร้างไลน์โทเค็นได้ที่ <a class="customer-a" href="https://notify-bot.line.me/th/">notify.line.me</a>
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  {{if .noneRegistered}}
+                  <form action="/token" method="POST" class="tokenForm">
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="token" aria-describedby="emailHelp" placeholder="LINE Token">
+                    </div>
+                    <button type="submit" class="btn btn-success">ลงทะเบียน</button>
+                  </form>
+                  {{else}}
+                    <br>
+                    <h3 class="white">ลงทะเบียนเสร็จเรียบร้อย!</h3>
+                    <p class="white">ระบบจะส่งแจ้งเตือนทันทีเมื่อมีการ์ตูนตอนใหม่</p>
+                  {{end}}
+                </div>
+              </div>
+            </div>
+            <div class="col">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <img src="https://raw.githubusercontent.com/zier/niceoppai_notify/master/screenshot/picture.png" />
+        </div>
+      </div>
+      <div class="footer">
+        <div class="row align-items-center">
+          <div class="col gray">
+            <p>จำนวนโทเค็นทั้งหมดในระบบ {{ .tokenCount }}</p>
+            <a class="github-button" href="https://github.com/zier/niceoppai_notify" data-style="mega" data-count-href="/zier/niceoppai_notify/stargazers" data-count-api="/repos/zier/niceoppai_notify#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star zier/niceoppai_notify on GitHub">Star</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>
