@@ -4,22 +4,21 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/zier/niceoppai_notify/config"
 	"github.com/zier/niceoppai_notify/entity"
 )
 
 // Service ...
 type Service struct {
-	*config.Config
+	TokenStore     TokenStore
 	CartoonDict    map[string]*entity.Cartoon
 	SourceCartoons SourceCartoons
 	LineNotify     LineNotify
 }
 
 // New ...
-func New(c *config.Config, s SourceCartoons, ln LineNotify) *Service {
+func New(ts TokenStore, s SourceCartoons, ln LineNotify) *Service {
 	service := &Service{
-		Config:         c,
+		TokenStore:     ts,
 		SourceCartoons: s,
 		LineNotify:     ln,
 		CartoonDict:    map[string]*entity.Cartoon{},
@@ -44,37 +43,51 @@ func (s *Service) Start() {
 	fmt.Println("Start Niceoppai Notify")
 
 	for {
-		s.FetchCartoon()
+		cartoonNewChapters, err := s.FetchCartoonNewChapter()
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		for cartoonName, newCartoon := range cartoonNewChapters {
+			s.CartoonDict[cartoonName] = newCartoon
+			err = s.SendAllPush(newCartoon)
+			if err != nil {
+				fmt.Println(err)
+			}
+		}
+
 		time.Sleep(time.Minute * 5)
 	}
 }
 
-// FetchCartoon ...
-func (s *Service) FetchCartoon() error {
+// FetchCartoonNewChapter ...
+func (s *Service) FetchCartoonNewChapter() (map[string]*entity.Cartoon, error) {
 	newCartoonDict, err := s.SourceCartoons.GetAllCartoonDetail()
 	if err != nil {
-		return err
+		return nil, err
 	}
 
+	cartoonNewChapters := map[string]*entity.Cartoon{}
 	for cartoonName, newCartoon := range newCartoonDict {
 		cartoon, exist := s.CartoonDict[cartoonName]
 		if exist && cartoon.ChapterTitle == newCartoon.ChapterTitle {
 			continue
 		}
-		s.CartoonDict[cartoonName] = newCartoon
 
-		err = s.SendAllPush(newCartoon)
-		if err != nil {
-			return err
-		}
+		cartoonNewChapters[cartoonName] = newCartoon
 	}
 
-	return nil
+	return cartoonNewChapters, nil
 }
 
 // SendAllPush ...
 func (s *Service) SendAllPush(cartoon *entity.Cartoon) error {
-	for _, token := range s.AppConfig.Tokens {
+	tokens, err := s.TokenStore.All()
+	if err != nil {
+		return err
+	}
+
+	for _, token := range tokens {
 		text := fmt.Sprintf("%s : %s -> %s", cartoon.Name, cartoon.ChapterTitle, cartoon.GetURL())
 		if err := s.LineNotify.SendPush(token, text); err != nil {
 			return err
