@@ -1,3 +1,2 @@
-FROM scratch
-COPY niceoppai_notify /
-CMD ["/niceoppai_notify"]
+FROM golang:1.7-onbuild
+CMD ["./app"]
