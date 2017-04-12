@@ -1,7 +1,6 @@
 # Niceoppai Notify
 
-
-แจ้งเตือนผ่าน Line Notify เวลามีการ์ตูนตอนใหม่อัพเดทในเว็บ niceoppai.net
+[notify.afternoob.com](https://notify.afternoob.com) แจ้งเตือนผ่าน Line Notify เวลามีการ์ตูนตอนใหม่อัพเดทในเว็บ niceoppai.net
 
 ![alt text](https://github.com/zier/niceoppai_notify/blob/master/screenshot/picture.png?raw=true "Screenshot")
 
