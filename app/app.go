@@ -90,7 +90,9 @@ func (s *Service) SendAllPush(cartoon *entity.Cartoon) error {
 	for _, token := range tokens {
 		text := fmt.Sprintf("%s : %s -> %s", cartoon.Name, cartoon.ChapterTitle, cartoon.GetURL())
 		if err := s.LineNotify.SendPush(token, text); err != nil {
-			return err
+			if err.Error() == "invalid token" {
+				s.TokenStore.Remove(token)
+			}
 		}
 	}
 
