@@ -9,7 +9,7 @@ type SourceCartoons interface {
 
 // LineNotify ...
 type LineNotify interface {
-	SendPush(token, text string) error
+	SendPush(token, text string, thumbnail string) error
 }
 
 // TokenStore ...
