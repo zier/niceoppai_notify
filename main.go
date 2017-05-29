@@ -1,23 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-
 	"gopkg.in/gin-gonic/gin.v1"
 
 	"github.com/go-redis/redis"
-	"github.com/julienschmidt/httprouter"
 	"github.com/zier/niceoppai_notify/app"
 	"github.com/zier/niceoppai_notify/linenotify"
 	"github.com/zier/niceoppai_notify/niceoppai"
 	"github.com/zier/niceoppai_notify/tokenstore"
 )
-
-// Index ...
-func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	fmt.Fprint(w, "Welcome!\n")
-}
 
 func main() {
 	r := redis.NewClient(
