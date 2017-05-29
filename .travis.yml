@@ -1,0 +1,13 @@
+language: go
+
+go:
+  - 1.8.3
+
+install:
+  - go get ./...
+
+services:
+  - redis-server
+
+script:
+  - go test ./...
