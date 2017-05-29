@@ -1,5 +1,7 @@
 # Niceoppai Notify
 
+[![Build Status](https://travis-ci.org/zier/niceoppai_notify.svg?branch=master)](https://travis-ci.org/zier/niceoppai_notify)
+
 [notify.afternoob.com](https://notify.afternoob.com) แจ้งเตือนผ่าน Line Notify เวลามีการ์ตูนตอนใหม่อัพเดทในเว็บ niceoppai.net
 
 ![alt text](https://github.com/zier/niceoppai_notify/blob/master/screenshot/picture.png?raw=true "Screenshot")
