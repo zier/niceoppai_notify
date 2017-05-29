@@ -2,8 +2,8 @@ package app
 
 import (
 	"fmt"
-	"time"
 	"regexp"
+	"time"
 
 	"github.com/zier/niceoppai_notify/entity"
 )
@@ -87,7 +87,7 @@ func (s *Service) SendAllPush(cartoon *entity.Cartoon) error {
 	if err != nil {
 		return err
 	}
-	
+
 	reg, err := regexp.Compile("_[0-9]+")
 	if err != nil {
 		return err
