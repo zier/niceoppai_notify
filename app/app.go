@@ -90,7 +90,7 @@ func (s *Service) SendAllPush(cartoon *entity.Cartoon) error {
 	
 	reg, err := regexp.Compile("_[0-9]+")
 	if err != nil {
-		retuen err
+		return err
 	}
 
 	for _, token := range tokens {
