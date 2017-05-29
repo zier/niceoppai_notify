@@ -3,6 +3,7 @@ package app
 import (
 	"fmt"
 	"time"
+	"regexp"
 
 	"github.com/zier/niceoppai_notify/entity"
 )
@@ -86,9 +87,15 @@ func (s *Service) SendAllPush(cartoon *entity.Cartoon) error {
 	if err != nil {
 		return err
 	}
+	
+	reg, err := regexp.Compile("_[0-9]+")
+	if err != nil {
+		retuen err
+	}
 
 	for _, token := range tokens {
-		text, thumbnail := fmt.Sprintf("%s : %s -> %s", cartoon.Name, cartoon.ChapterTitle, cartoon.GetURL()), cartoon.Thumbnail
+		text := fmt.Sprintf("%s : %s -> %s", cartoon.Name, cartoon.ChapterTitle, cartoon.GetURL())
+		thumbnail := reg.ReplaceAllString(cartoon.Thumbnail, "_200")
 		if err := s.LineNotify.SendPush(token, text, thumbnail); err != nil {
 			if err.Error() == "invalid token" {
 				s.TokenStore.Remove(token)
