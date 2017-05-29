@@ -4,7 +4,7 @@ import "testing"
 
 func TestSendPush(t *testing.T) {
 	n := &Service{}
-	err := n.SendPush("ZzdbtQb4Zs4zf3XCxJD2QnlCvt5wWBNE9DRm9JY8UY4", "test", "http://www.google.com")
+	err := n.SendPush("2PxNQT9aW7DWT16PmJyctLrw31VptTNs4mOtYsSeIqa", "test", "http://www.niceoppai.net/wp-content/manga/cover/tbn/talesofdemonandgod_200x0.png")
 
 	if err != nil {
 		t.Error(err)

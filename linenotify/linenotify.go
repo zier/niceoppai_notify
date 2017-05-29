@@ -17,6 +17,7 @@ func (ln *Service) SendPush(token, text string, thumbnail string) error {
 	params := url.Values{}
 	params.Set("message", text)
 	params.Set("imageFullsize", thumbnail)
+	params.Set("imageThumbnail", thumbnail)
 	body := bytes.NewBufferString(params.Encode())
 
 	// Create client
