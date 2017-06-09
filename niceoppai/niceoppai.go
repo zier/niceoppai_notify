@@ -95,7 +95,7 @@ func (n *Service) GetAllCartoonDetail() (map[string]*entity.Cartoon, error) {
 		cartoon.URL = scrape.Attr(url, "href")
 		cartoon.Thumbnail = scrape.Attr(thumbnail, "src")
 
-		cartoonDict[cartoon.Name] = cartoon
+		cartoonDict[cartoon.URL] = cartoon
 	}
 
 	return cartoonDict, nil

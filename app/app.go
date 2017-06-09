@@ -49,8 +49,8 @@ func (s *Service) Start() {
 			fmt.Println(err)
 		}
 
-		for cartoonName, newCartoon := range cartoonNewChapters {
-			s.CartoonDict[cartoonName] = newCartoon
+		for cartoonURL, newCartoon := range cartoonNewChapters {
+			s.CartoonDict[cartoonURL] = newCartoon
 			err = s.SendAllPush(newCartoon)
 			if err != nil {
 				fmt.Println(err)
@@ -69,13 +69,13 @@ func (s *Service) FetchCartoonNewChapter() (map[string]*entity.Cartoon, error) {
 	}
 
 	cartoonNewChapters := map[string]*entity.Cartoon{}
-	for cartoonName, newCartoon := range newCartoonDict {
-		cartoon, exist := s.CartoonDict[cartoonName]
+	for cartoonURL, newCartoon := range newCartoonDict {
+		cartoon, exist := s.CartoonDict[cartoonURL]
 		if exist && cartoon.ChapterTitle == newCartoon.ChapterTitle {
 			continue
 		}
 
-		cartoonNewChapters[cartoonName] = newCartoon
+		cartoonNewChapters[cartoonURL] = newCartoon
 	}
 
 	return cartoonNewChapters, nil
